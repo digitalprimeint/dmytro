@@ -17,6 +17,12 @@ services:
     volumes:
       - "./graphql:/src"
       - "/src/node_modules"
+  restapi:
+    container_name: "restapi"
+    build: restapi
+    volumes:
+      - "./restapi:/src"
+      - "/src/node_modules"
   proxy:
     container_name: "proxy"
     build: proxy
@@ -27,17 +33,21 @@ services:
     environment:
       PROXY_USER: graphql # developer local environment
       PROXY_PASSWORD: demopassword2022 # developer local environment
-      API_GATEWAY: gateway:80 # developer local environment
+      API_GATEWAY: gateway:3000 # developer local environment
       IP_USA: 207.97.227.239
       IP_CANADA: 103.151.126.50
       IP_PANAMA: 201.226.52.23
-      IP_ACTIVE: REMOTE
+      IP_ACTIVE: IP_CANADA
       IP_DOCKER: INVALID
     ports:
       - 80:3000
   gateway:
     container_name: "gateway"
-    build: api_gateway
+    build: gateway
     restart: always
-    depends_on:
-      - graphql
+    volumes:
+      - "./gateway:/src"
+      - "/src/node_modules"
+    environment:
+      API_GRAPHQL_HOST: graphql:4000
+      API_REST_HOST: restapi:3000

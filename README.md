@@ -1,6 +1,6 @@
 ### INSTRUCTION
 
-#### REQUIREMENTS
+#### 1- REQUIREMENTS
 
 In order to run this project, you must have installed:
 
@@ -9,8 +9,9 @@ In order to run this project, you must have installed:
 
 Just download from Windows & Mac OS the Docker Desktop Application.
 
-#### SETTINGS
+#### 2- SETTINGS
 
+##### GRAPHQL API
 The graphql API project requires a .env file with the following variables.
 
 - DATABASE_NAME=
@@ -21,13 +22,22 @@ The graphql API project requires a .env file with the following variables.
 
 or you can assign those env variables using docker-compose or export VARIABLE_NAME=value before the docker-compose up command.
 
-#### RUN
+Notes: A default .env file is added and configured using the private docker network.
+
+#### 3- RUN
 
 This is a docker-compose micro services eco system. To run the project use the following command:
 
 `docker-compose up -d`
 
-#### RESTRICTIONS
+CONTAINERS
+
+- graphql
+- proxy
+- gateway
+- db
+
+#### 4- RESTRICTIONS
 
 This docker-compose ecosystem does not open the public access to:
 
