@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  db:
+    container_name: "db"
+    image: mysql:oracle
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - ./mysqldb:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: demopassword2022 # developer local environment
+      MYSQL_DATABASE: classicmodel
+  graphql:
+    container_name: "graphql"
+    build: graphql
+    volumes:
+      - "./graphql:/src"
+      - "/src/node_modules"
+  proxy:
+    container_name: "proxy"
+    build: proxy
+    restart: always
+    volumes:
+      - "./proxy:/src"
+      - "/src/node_modules"
+    environment:
+      PROXY_USER: graphql # developer local environment
+      PROXY_PASSWORD: demopassword2022 # developer local environment
+      API_GATEWAY: gateway:80 # developer local environment
+      IP_USA: 207.97.227.239
+      IP_CANADA: 103.151.126.50
+      IP_PANAMA: 201.226.52.23
+      IP_ACTIVE: REMOTE
+      IP_DOCKER: INVALID
+    ports:
+      - 80:3000
+  gateway:
+    container_name: "gateway"
+    build: api_gateway
+    restart: always
+    depends_on:
+      - graphql
