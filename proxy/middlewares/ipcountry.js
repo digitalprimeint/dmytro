@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
         let valid_countries = ['PA', 'CA']; // those countries could be collected from the database or cache.
 
         if(!valid_countries.includes(country_code)) {
-            return res.status(400).json({ "errors": [{ "message": `Your country ${country_code} is not authorized.` }]});
+            return res.status(400).json({ error: { "errors": [{ "message": `Your country ${country_code} is not authorized.` }]}});
         }
 
         res.set("Proxy-Country", country_code);
@@ -24,7 +24,7 @@ module.exports = (req, res, next) => {
             next();
         }
         else {
-            return res.status(400).json({ "errors": [{ "message": `Docker container IP is not valid.` }]});
+            return res.status(400).json({ error: { "errors": [{ "message": `Docker container IP is not valid.` }]}});
         }
     }
 }

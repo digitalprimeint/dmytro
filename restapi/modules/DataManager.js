@@ -23,27 +23,19 @@ class DataManager {
             query: {}
         }, options);
 
-        if(opts.rows.length === 0) {
+        if (opts.rows.length === 0) {
             return {
                 data: []
             }
         }
 
-        try {
-            for (let i = 0; i < this.commands.length; i++) {
-                let cmd = this.commands[i];
-                opts = cmd.process(opts);
-            }
-
-            return {
-                data: opts.rows
-            }
+        for (let i = 0; i < this.commands.length; i++) {
+            let cmd = this.commands[i];
+            opts = cmd.process(opts);
         }
-        catch (error) {
-            console.log(error);
-            return {
-                errors: [error.message]
-            }
+
+        return {
+            data: opts.rows
         }
     }
 

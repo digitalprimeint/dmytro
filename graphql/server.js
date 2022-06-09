@@ -5,6 +5,7 @@ const db = require("./database");
 const server = new ApolloServer({
     modules: [
         require("./types/employees"),
+        require("./types/customers"),
     ],
     context: () => {
         return {
