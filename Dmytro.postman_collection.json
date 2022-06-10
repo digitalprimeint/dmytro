@@ -29,13 +29,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/",
-					"protocol": "http",
+					"raw": "https://dmytro-proxy-n5cne2morq-uc.a.run.app",
+					"protocol": "https",
 					"host": [
-						"localhost"
-					],
-					"path": [
-						""
+						"dmytro-proxy-n5cne2morq-uc",
+						"a",
+						"run",
+						"app"
 					]
 				}
 			},
@@ -64,13 +64,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/",
-					"protocol": "http",
+					"raw": "https://dmytro-proxy-n5cne2morq-uc.a.run.app",
+					"protocol": "https",
 					"host": [
-						"localhost"
-					],
-					"path": [
-						""
+						"dmytro-proxy-n5cne2morq-uc",
+						"a",
+						"run",
+						"app"
 					]
 				}
 			},
@@ -99,13 +99,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/",
-					"protocol": "http",
+					"raw": "https://dmytro-proxy-n5cne2morq-uc.a.run.app",
+					"protocol": "https",
 					"host": [
-						"localhost"
-					],
-					"path": [
-						""
+						"dmytro-proxy-n5cne2morq-uc",
+						"a",
+						"run",
+						"app"
 					]
 				}
 			},
@@ -134,13 +134,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/",
-					"protocol": "http",
+					"raw": "https://dmytro-proxy-n5cne2morq-uc.a.run.app",
+					"protocol": "https",
 					"host": [
-						"localhost"
-					],
-					"path": [
-						""
+						"dmytro-proxy-n5cne2morq-uc",
+						"a",
+						"run",
+						"app"
 					]
 				}
 			},
@@ -169,13 +169,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/",
-					"protocol": "http",
+					"raw": "https://dmytro-proxy-n5cne2morq-uc.a.run.app",
+					"protocol": "https",
 					"host": [
-						"localhost"
-					],
-					"path": [
-						""
+						"dmytro-proxy-n5cne2morq-uc",
+						"a",
+						"run",
+						"app"
 					]
 				}
 			},
@@ -204,13 +204,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/",
-					"protocol": "http",
+					"raw": "https://dmytro-proxy-n5cne2morq-uc.a.run.app",
+					"protocol": "https",
 					"host": [
-						"localhost"
-					],
-					"path": [
-						""
+						"dmytro-proxy-n5cne2morq-uc",
+						"a",
+						"run",
+						"app"
 					]
 				}
 			},
@@ -239,20 +239,20 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/",
-					"protocol": "http",
+					"raw": "https://dmytro-proxy-n5cne2morq-uc.a.run.app",
+					"protocol": "https",
 					"host": [
-						"localhost"
-					],
-					"path": [
-						""
+						"dmytro-proxy-n5cne2morq-uc",
+						"a",
+						"run",
+						"app"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Localhost RestAPI",
+			"name": "RestAPI cars",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -264,30 +264,28 @@
 						}
 					]
 				},
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"_includes\": \"MakeName,MakeId\",\n    \"MakeId\": \"441\",\n    \"_sort\": \"MakeId\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost/cars?_sort=MakeId&MakeId=441&_includes=MakeName,MakeId",
-					"protocol": "http",
+					"raw": "https://dmytro-proxy-n5cne2morq-uc.a.run.app/cars",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"dmytro-proxy-n5cne2morq-uc",
+						"a",
+						"run",
+						"app"
 					],
 					"path": [
 						"cars"
-					],
-					"query": [
-						{
-							"key": "_sort",
-							"value": "MakeId"
-						},
-						{
-							"key": "MakeId",
-							"value": "441"
-						},
-						{
-							"key": "_includes",
-							"value": "MakeName,MakeId"
-						}
 					]
 				}
 			},

@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
 
     if(lookup !== null) {
         let country_code = lookup.country;
-        let valid_countries = ['PA', 'CA']; // those countries could be collected from the database or cache.
+        let valid_countries = process.env.COUNTRY_CODES !== undefined ? process.env.COUNTRY_CODES.split(",") : ['PA', 'CA']; // those countries could be collected from the database or cache.
 
         if(!valid_countries.includes(country_code)) {
             return res.status(400).json({ error: { "errors": [{ "message": `Your country ${country_code} is not authorized.` }]}});
