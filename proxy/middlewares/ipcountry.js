@@ -2,11 +2,15 @@ const geoip = require('geoip-country');
 const ip = require('ip');
 
 module.exports = (req, res, next) => {
-    let ip_active = process.env.IP_ACTIVE === "REMOTE" ? ip.address() : process.env[process.env.IP_ACTIVE];
+    let ip1 = ip.address();
+    let ip2 = req.headers["X-Forwarded-For"];
+    let ip3 = req.headers['X-Appengine-User-Ip'];
+    let ip_active = process.env.IP_ACTIVE === "REMOTE" ? ip1 : process.env[process.env.IP_ACTIVE];
 
-    let lookup = geoip.lookup(ip.address());
+    let lookup = geoip.lookup(ip1);
     lookup = lookup === null ? geoip.lookup(ip_active) : lookup;
-    console.log("country", lookup === null ? "NOT FOUND" : lookup.country, "ip", ip.address());
+    console.log("country", lookup === null ? "NOT FOUND" : lookup.country, "ips", ip1, ip2, ip3);
+    console.log(req.headers);
 
     if(lookup !== null) {
         let country_code = lookup.country;

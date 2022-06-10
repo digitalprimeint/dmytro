@@ -19,12 +19,12 @@ app.use(rateLimit({
 	max: 10,
 	standardHeaders: true,
 	legacyHeaders: false,
-    message: { "errors": [{ "message": "Too many requests, please try again later." }]}
+	message: { "errors": [{ "message": "Too many requests, please try again later." }] }
 }));
 
 
 app.use("/", proxy(process.env.API_GATEWAY, {
 	https: process.env.PROXY_HTTPS === undefined ? false : true
-  }));
+}));
 
 app.listen(PORT, () => console.log("Server running on http://localhost:3000"));
