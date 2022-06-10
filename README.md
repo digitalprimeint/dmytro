@@ -75,3 +75,10 @@ This module is also returning in the headers the current country accepted.
 #### 7- RATE LIMIT
 
 It is hardcoded to 10 request by minute.
+
+### 8- DATABASE
+
+The local environemnt has a mysql db with the dump.sql and also the db_diagram.pdf. Running the docker-compose up command will install 
+the database with schema and records.
+
+The graphql is providing the same table and column name, also the relation between tables.
