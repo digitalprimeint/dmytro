@@ -9,6 +9,11 @@ app.get("/", async (req, res) => {
         let response = await fetch("https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/car?format=json");
         let data = await response.json();
         let manager = new DataManager();
+
+        if(req.query["_authorization"] !== undefined) {
+            delete req.query["_authorization"];
+        }
+        
         let model = manager.process({
             rows: data.Results,
             body: req.body,
