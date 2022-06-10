@@ -6,6 +6,11 @@ const server = new ApolloServer({
     modules: [
         require("./types/employees"),
         require("./types/customers"),
+        require("./types/payments"),
+        require("./types/orders"),
+        require("./types/orderdetails"),
+        require("./types/products"),
+        require("./types/productlines")
     ],
     context: () => {
         return {

@@ -25,6 +25,7 @@ const typeDefs = gql`
         officeCode : String
         reportsTo : Int
         jobTitle : String
+        customers: [Customer]
     }
 `;
 
@@ -32,6 +33,11 @@ const resolvers = {
     Query: {
         employees: (_, args, context, info) => {
             return context.db.employees.findAll({where: args.filter, order: args.sort, limit: args.limit, offset: args.offset});
+        }
+    },
+    Employee: {
+        customers: (obj, args, context, info) => {
+            return context.db.customers.findAll({where: { salesRepEmployeeNumber: obj.employeeNumber }});
         }
     }
 }

@@ -37,7 +37,7 @@ services:
       IP_USA: 207.97.227.239
       IP_CANADA: 103.151.126.50
       IP_PANAMA: 201.226.52.23
-      IP_ACTIVE: IP_CANADA
+      IP_ACTIVE: REMOTE
       IP_DOCKER: INVALID
     ports:
       - 80:3000

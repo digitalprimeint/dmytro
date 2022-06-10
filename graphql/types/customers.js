@@ -33,6 +33,10 @@ const typeDefs = gql`
         postalCode: String
         country: String
         creditLimit: Float
+        salesRepEmployeeNumber: Int
+        employee: Employee
+        payments: [Payment]
+        orders: [Order]
     }
 `;
 
@@ -40,6 +44,17 @@ const resolvers = {
     Query: {
         customers: (_, args, context, info) => {
             return context.db.customers.findAll({where: args.filter, order: args.sort, limit: args.limit, offset: args.offset});
+        }
+    },
+    Customer: {
+        employee: (obj, args, context, info) => {
+            return context.db.employees.findByPk(obj.salesRepEmployeeNumber);
+        },
+        payments: (obj, args, context, info) => {
+            return context.db.payments.findAll({ where: { customerNumber: obj.customerNumber }});
+        },
+        orders: (obj, args, context, info) => {
+            return context.db.orders.findAll({ where: { customerNumber: obj.customerNumber }});
         }
     }
 }
