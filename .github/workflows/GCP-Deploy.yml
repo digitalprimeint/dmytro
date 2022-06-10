@@ -17,7 +17,6 @@ jobs:
           IMAGE_NAME_PROXY: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_proxy
           IMAGE_NAME_GRAPHQL: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_graphql
           IMAGE_NAME_RESTAPI: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_restapi
-          IMAGE_NAME_DB: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_db
         steps:
 
         - name: Login
@@ -45,9 +44,6 @@ jobs:
         - name: Build restapi docker image
           run: docker build -f ${GITHUB_WORKSPACE}/restapi/Dockerfile.prod -t $IMAGE_NAME_RESTAPI ${GITHUB_WORKSPACE}/restapi
 
-        - name: Build db docker image
-          run: docker build -f ${GITHUB_WORKSPACE}/mysqldb/Dockerfile -t $IMAGE_NAME_DB ${GITHUB_WORKSPACE}/mysqldb
-
         - name: Push gateway docker image
           run: docker push $IMAGE_NAME_GATEWAY
 
@@ -59,9 +55,6 @@ jobs:
 
         - name: Push restapi docker image
           run: docker push $IMAGE_NAME_RESTAPI
-
-        - name: Push restapi docker image
-          run: docker push $IMAGE_NAME_DB
 
         #- name: Deploy Docker image
         #  run: gcloud run deploy ${{ secrets.GCP_PROJECT_ID }} --image $IMAGE_NAME --region us-central1 --platform managed
