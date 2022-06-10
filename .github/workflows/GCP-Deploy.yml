@@ -34,19 +34,19 @@ jobs:
           uses: actions/checkout@v2
 
         - name: Build gateway docker image
-          run: docker build -f gateway/Dockerfile.prod -t $IMAGE_NAME_GATEWAY
+          run: docker build -f ${GITHUB_WORKSPACE}/gateway/Dockerfile.prod -t $IMAGE_NAME_GATEWAY ${GITHUB_WORKSPACE}/gateway
 
         - name: Build proxy docker image
-          run: docker build -f proxy/Dockerfile.prod -t $IMAGE_NAME_PROXY
+          run: docker build -f ${GITHUB_WORKSPACE}/proxy/Dockerfile.prod -t $IMAGE_NAME_PROXY ${GITHUB_WORKSPACE}/proxy
 
         - name: Build graphql docker image
-          run: docker build -f graphql/Dockerfile.prod -t $IMAGE_NAME_GRAPHQL
+          run: docker build -f ${GITHUB_WORKSPACE}/graphql/Dockerfile.prod -t $IMAGE_NAME_GRAPHQL ${GITHUB_WORKSPACE}/graphql
 
         - name: Build restapi docker image
-          run: docker build -f restapi/Dockerfile.prod -t $IMAGE_NAME_RESTAPI
+          run: docker build -f ${GITHUB_WORKSPACE}/restapi/Dockerfile.prod -t $IMAGE_NAME_RESTAPI ${GITHUB_WORKSPACE}/restapi
 
         - name: Build db docker image
-          run: docker build -f mysqldb/Dockerfile -t $IMAGE_NAME_DB
+          run: docker build -f ${GITHUB_WORKSPACE}/mysqldb/Dockerfile -t $IMAGE_NAME_DB ${GITHUB_WORKSPACE}/mysqldb
 
         - name: Push gateway docker image
           run: docker push $IMAGE_NAME_GATEWAY
