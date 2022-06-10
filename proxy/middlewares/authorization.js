@@ -6,10 +6,16 @@ module.exports = async (req, res, next) => {
 
     try {
         if (token === undefined) throw new Error("Invalid Token");
-        if (token.indexOf("Bearer") === -1) throw new Error("Invalid Token");
-        if (token.split(" ").length !== 2) throw new Error("Invalid Token");
+        let includeBearer = token.indexOf("Bearer") !== -1;
 
-        let buff = Buffer.from(token.split(" ")[1], 'base64');
+        if(includeBearer === true) {
+            if (token.indexOf("Bearer") === -1) throw new Error("Invalid Token");
+            if (token.split(" ").length !== 2) throw new Error("Invalid Token");
+
+            token = token.split(" ")[1];
+        }
+
+        let buff = Buffer.from(token, 'base64');
         let text = buff.toString('ascii');
 
         if (text.indexOf(":") === -1) throw new Error("Invalid Token");
