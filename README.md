@@ -1,4 +1,4 @@
-### INSTRUCTION
+### BACKEND DEVELOPMENT INTERVIEW TEST - DESKREE Jun 8, 2022
 
 #### 1- REQUIREMENTS
 
@@ -12,7 +12,7 @@ Just download from Windows & Mac OS the Docker Desktop Application.
 #### 2- SETTINGS
 
 ##### GRAPHQL API
-The graphql API project requires a .env file with the following variables.
+The graphql API project requires an .env file with the following variables.
 
 - DATABASE_NAME=
 - DATABASE_USER=
@@ -76,9 +76,26 @@ This module is also returning in the headers the current country accepted.
 
 It is hardcoded to 10 request by minute.
 
-### 8- DATABASE
+#### 8- DATABASE
 
 The local environemnt has a mysql db with the dump.sql and also the db_diagram.pdf. Running the docker-compose up command will install 
 the database with schema and records.
 
 The graphql is providing the same table and column name, also the relation between tables.
+
+#### 9- POSTMAN
+
+This project includes a postman file.
+
+`Dmytro.postman_collection.json`
+
+#### 10- GOOGLE CLOUD SERVICES
+
+This project include 2 pictures of the Google Services used for the automated deployment. 
+
+- Google Cloud Run
+- Google Cloud SQL
+
+Also other dependencies like: Serverless Network, Google Build, etc.
+
+The directory .github/workflows include the Github Action definition. 
