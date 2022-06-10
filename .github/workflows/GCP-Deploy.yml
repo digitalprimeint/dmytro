@@ -56,5 +56,14 @@ jobs:
         - name: Push restapi docker image
           run: docker push $IMAGE_NAME_RESTAPI
 
-        #- name: Deploy Docker image
-        #  run: gcloud run deploy ${{ secrets.GCP_PROJECT_ID }} --image $IMAGE_NAME --region us-central1 --platform managed
+        - name: Deploy restapi docker image
+          run: gcloud run deploy dmytro-restapi --image=$IMAGE_NAME_RESTAPI --region=us-central1 --project=${{ secrets.GCP_PROJECT_ID }}
+
+        - name: Deploy graphql docker image
+          run: gcloud run deploy dmytro-graphql --image=$IMAGE_NAME_GRAPHQL --region=us-central1 --project=${{ secrets.GCP_PROJECT_ID }}
+
+        - name: Deploy gateway docker image
+          run: gcloud run deploy dmytro-gateway --image=$IMAGE_NAME_GATEWAY --region=us-central1 --project=${{ secrets.GCP_PROJECT_ID }}
+
+        - name: Deploy proxy docker image
+          run: gcloud run deploy dmytro-proxy --image=$IMAGE_NAME_PROXY --region=us-central1 --project=${{ secrets.GCP_PROJECT_ID }}
