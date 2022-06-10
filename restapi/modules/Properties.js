@@ -6,8 +6,8 @@ class Properties {
         if (body !== undefined) {
             let keys = Object.keys(body);
             keys.forEach(key => {
-                if (body[key] !== null &&
-                    Array.isArray(body[key]) &&
+                if (body[key] !== null ||
+                    Array.isArray(body[key]) ||
                     Object.keys(body[key]).length === 0) {
                     holder[key] = body[key];
                 }

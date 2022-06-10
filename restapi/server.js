@@ -1,12 +1,16 @@
 const express = require("express");
 const fs = require('fs');
 const path = require('path');
+const bodyParser = require('body-parser');
 const DataManager = require("./modules/DataManager");
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 var data = { Results: [] };
 
-app.get("/", async (req, res) => {
+app.use("/", async (req, res) => {
 
     try {
         if(data.Results.length === 0) {
@@ -19,8 +23,12 @@ app.get("/", async (req, res) => {
 
         let manager = new DataManager();
 
-        if(req.query["_authorization"] !== undefined) {
+        if(req.query && req.query["_authorization"] !== undefined) {
             delete req.query["_authorization"];
+        }
+
+        if(req.body && req.body["_authorization"] !== undefined) {
+            delete req.body["_authorization"];
         }
 
         let model = manager.process({
@@ -32,6 +40,7 @@ app.get("/", async (req, res) => {
         res.json(model);
     }
     catch (error) {
+        console.log(error);
         res.status(400).json({ error: { errors: [error.message]}});
     }
 });

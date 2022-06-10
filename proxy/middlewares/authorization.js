@@ -3,7 +3,8 @@ module.exports = async (req, res, next) => {
     if (req.body.operationName !== undefined && req.body.operationName === "IntrospectionQuery") return next();
 
     let token = req.headers.authorization === undefined ? req.query["_authorization"] : req.headers.authorization;
-    console.log("Authorization", req.headers.authorization, req.query["_authorization"]);
+    if(token === undefined) { token = req.body["_authorization"]; }
+    console.log("Authorization", req.headers.authorization, req.query["_authorization"], req.body["_authorization"]);
 
     try {
         if (token === undefined) throw new Error("Invalid Token");
