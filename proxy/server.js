@@ -4,6 +4,7 @@ const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
 const apicountry = require('./middlewares/ipcountry');
 const authorization = require('./middlewares/authorization');
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 app.enable('trust proxy');
@@ -24,4 +25,4 @@ app.use(rateLimit({
 
 app.use("/", proxy(process.env.API_GATEWAY));
 
-app.listen(3000, () => console.log("Server running on http://localhost:3000"));
+app.listen(PORT, () => console.log("Server running on http://localhost:3000"));

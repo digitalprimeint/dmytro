@@ -1,0 +1,67 @@
+name: Docker
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+    deploy:
+
+        name: Setup Gcloud Account
+        runs-on: ubuntu-latest
+        env:
+          IMAGE_NAME_GATEWAY: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_GATEWAY
+          IMAGE_NAME_PROXY: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_PROXY
+          IMAGE_NAME_GRAPHQL: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_GRAPHQL
+          IMAGE_NAME_RESTAPI: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_RESTAPI
+          IMAGE_NAME_DB: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_DB
+        steps:
+
+        - name: Login
+          uses: google-github-actions/setup-gcloud@v0
+          with:
+            project_id: ${{ secrets.GCP_PROJECT_ID }}
+            service_account_email: ${{ secrets.GCP_EMAIL }}
+            service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+
+        - name: Configure Docker
+          run: gcloud auth configure-docker --quiet
+
+        - name: Checkout repository
+          uses: actions/checkout@v2
+
+        - name: Build gateway docker image
+          run: docker build -f gateway/Dockerfile.prod -t $IMAGE_NAME_GATEWAY
+
+        - name: Build proxy docker image
+          run: docker build -f proxy/Dockerfile.prod -t $IMAGE_NAME_PROXY
+
+        - name: Build graphql docker image
+          run: docker build -f graphql/Dockerfile.prod -t $IMAGE_NAME_GRAPHQL
+
+        - name: Build restapi docker image
+          run: docker build -f restapi/Dockerfile.prod -t $IMAGE_NAME_RESTAPI
+
+        - name: Build db docker image
+          run: docker build -f mysqldb/Dockerfile -t $IMAGE_NAME_DB
+
+        - name: Push gateway docker image
+          run: docker push $IMAGE_NAME_GATEWAY
+
+        - name: Push proxy docker image
+          run: docker push $IMAGE_NAME_PROXY
+
+        - name: Push graphql docker image
+          run: docker push $IMAGE_NAME_GRAPHQL
+
+        - name: Push restapi docker image
+          run: docker push $IMAGE_NAME_RESTAPI
+
+        - name: Push restapi docker image
+          run: docker push $IMAGE_NAME_DB
+
+        #- name: Deploy Docker image
+        #  run: gcloud run deploy ${{ secrets.GCP_PROJECT_ID }} --image $IMAGE_NAME --region us-central1 --platform managed
