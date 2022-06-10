@@ -13,11 +13,11 @@ jobs:
         name: Setup Gcloud Account
         runs-on: ubuntu-latest
         env:
-          IMAGE_NAME_GATEWAY: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_GATEWAY
-          IMAGE_NAME_PROXY: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_PROXY
-          IMAGE_NAME_GRAPHQL: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_GRAPHQL
-          IMAGE_NAME_RESTAPI: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_RESTAPI
-          IMAGE_NAME_DB: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_DB
+          IMAGE_NAME_GATEWAY: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_gateway
+          IMAGE_NAME_PROXY: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_proxy
+          IMAGE_NAME_GRAPHQL: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_graphql
+          IMAGE_NAME_RESTAPI: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_restapi
+          IMAGE_NAME_DB: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}_db
         steps:
 
         - name: Login
