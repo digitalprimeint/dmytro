@@ -1,19 +1,28 @@
 const express = require("express");
-const fetch = require("node-fetch");
+const fs = require('fs');
+const path = require('path');
 const DataManager = require("./modules/DataManager");
 const app = express();
+
+var data = { Results: [] };
 
 app.get("/", async (req, res) => {
 
     try {
-        let response = await fetch("https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/car?format=json");
-        let data = await response.json();
+        if(data.Results.length === 0) {
+            let file_path = path.resolve(__dirname, "data.json");
+            let rawdata = fs.readFileSync(file_path);
+            data = JSON.parse(rawdata);
+
+            console.log("DATA LOADED", data.Results.length);
+        }
+
         let manager = new DataManager();
 
         if(req.query["_authorization"] !== undefined) {
             delete req.query["_authorization"];
         }
-        
+
         let model = manager.process({
             rows: data.Results,
             body: req.body,

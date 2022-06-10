@@ -35,7 +35,7 @@ services:
       IP_CANADA: 103.151.126.50
       IP_PANAMA: 201.226.52.23
       IP_ACTIVE: REMOTE
-      IP_DOCKER: INVALID
+      IP_DOCKER: VALID
     ports:
       - 80:3000
   gateway:
