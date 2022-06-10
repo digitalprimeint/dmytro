@@ -23,6 +23,8 @@ app.use(rateLimit({
 }));
 
 
-app.use("/", proxy(process.env.API_GATEWAY));
+app.use("/", proxy(process.env.API_GATEWAY, {
+	https: process.env.PROXY_HTTPS === undefined ? false : true
+  }));
 
 app.listen(PORT, () => console.log("Server running on http://localhost:3000"));
