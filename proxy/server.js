@@ -1,5 +1,6 @@
-const express = require("express");
+const express = require('express');
 const proxy = require('express-http-proxy');
+const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
 const apicountry = require('./middlewares/ipcountry');
@@ -9,6 +10,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.enable('trust proxy');
 
+app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(apicountry);
