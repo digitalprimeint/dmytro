@@ -19,13 +19,13 @@ Create a small microservice-based application on the Google Cloud Platform. The 
 
 #### General requirements:
 
-    - Submission: public GitHub repository(s)
-        - Must be properly structured including README, branches, and good structure and usage of pull requests
-    - Deadline: Monday, June 13th at 10 am EDT
-    - Other requirements:
-        - Architecture must be built in a way where it will be easy to add more drinks microservices later in the future (ex. wine,  tea, etc.)
-        - You can use either VM or Serverless
-        - Must be built entirely on the Google Cloud Platform. Note that all candidates receiving this assignment have limited or no knowledge of GCP. Hence, with this requirement, we will be testing how fast you can learn and adapt new concepts and technology.
-    - Extras:
-        - If you think of any other ways to enhance the architecture structure or functionality - feel free to do so. Your creative freedom is not limited here. Just make sure your app corresponds to the requirements listed above. 
-        - Extra points will be given if a postman collection is submitted in the repository too
+- Submission: public GitHub repository(s)
+    - Must be properly structured including README, branches, and good structure and usage of pull requests
+- Deadline: Monday, June 13th at 10 am EDT
+- Other requirements:
+    - Architecture must be built in a way where it will be easy to add more drinks microservices later in the future (ex. wine,  tea, etc.)
+    - You can use either VM or Serverless
+    - Must be built entirely on the Google Cloud Platform. Note that all candidates receiving this assignment have limited or no knowledge of GCP. Hence, with this requirement, we will be testing how fast you can learn and adapt new concepts and technology.
+- Extras:
+    - If you think of any other ways to enhance the architecture structure or functionality - feel free to do so. Your creative freedom is not limited here. Just make sure your app corresponds to the requirements listed above. 
+    - Extra points will be given if a postman collection is submitted in the repository too
