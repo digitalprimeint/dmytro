@@ -9,7 +9,7 @@ const typeDefs = gql`
     } 
 
     extend type Query {
-        payments(filter: FilterPayment, sort: [[String]], limit: Int, offset: Int) : [Payment]
+        payments(filter: FilterPayment, sort: [[String]], limit: Int, offset: Int, search: Boolean) : [Payment]
     }
 
     type Payment {
@@ -24,7 +24,19 @@ const typeDefs = gql`
 const resolvers = {
     Query: {
         payments: (_, args, context, info) => {
-            return context.db.payments.findAll({where: args.filter, order: args.sort, limit: args.limit, offset: args.offset});
+            let filter = args.filter;
+            if(args.filter !== undefined && args.search === true) {
+                filter = { ...args.filter };
+                Object.keys(filter).map(key => {
+                    if(typeof filter[key]  === "string") {
+                        filter[key] = {
+                            [context.Op.like]: `%${args.filter[key]}%`
+                        }
+                    }
+                });
+            }
+
+            return context.db.payments.findAll({where: filter, order: args.sort, limit: args.limit, offset: args.offset});
         }
     },
     Payment: {

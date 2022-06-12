@@ -17,7 +17,7 @@ const typeDefs = gql`
     } 
 
     extend type Query {
-        customers(filter: FilterCustomer, sort: [[String]], limit: Int, offset: Int) : [Customer]
+        customers(filter: FilterCustomer, sort: [[String]], limit: Int, offset: Int, search: Boolean) : [Customer]
     }
 
     type Customer {
@@ -43,7 +43,19 @@ const typeDefs = gql`
 const resolvers = {
     Query: {
         customers: (_, args, context, info) => {
-            return context.db.customers.findAll({where: args.filter, order: args.sort, limit: args.limit, offset: args.offset});
+            let filter = args.filter;
+            if(args.filter !== undefined && args.search === true) {
+                filter = { ...args.filter };
+                Object.keys(filter).map(key => {
+                    if(typeof filter[key]  === "string") {
+                        filter[key] = {
+                            [context.Op.like]: `%${args.filter[key]}%`
+                        }
+                    }
+                });
+            }
+
+            return context.db.customers.findAll({where: filter, order: args.sort, limit: args.limit, offset: args.offset});
         }
     },
     Customer: {

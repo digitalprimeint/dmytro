@@ -24,8 +24,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query($filter: FilterEmployee) {\n    employees(filter: $filter, sort: [[\"employeeNumber\", \"DESC\"]], limit: 1) {\n        employeeNumber\n        lastName\n        firstName\n        customers {\n            customerName\n            customerNumber\n        }\n    }\n}",
-						"variables": "{\n    \"filter\": {\n        \"employeeNumber\": \"1702\"\n    }\n}"
+						"query": "query($filter: FilterEmployee) {\n    employees(filter: $filter, sort: [[\"employeeNumber\", \"DESC\"]], limit: 1, search: true) {\n        employeeNumber\n        lastName\n        firstName\n        customers {\n            customerName\n            customerNumber\n        }\n    }\n}",
+						"variables": "{\n    \"filter\": {\n        \"lastName\": \"Gerar\"\n    }\n}"
 					}
 				},
 				"url": {
@@ -59,8 +59,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query($filter: FilterCustomer) {\n    customers(filter: $filter, limit: 1) {\n        customerNumber\n        customerName\n        employee {\n            employeeNumber\n            lastName\n            firstName\n        }\n        payments {\n            paymentDate\n            amount\n        },\n        orders {\n            orderNumber\n            orderDate\n            requiredDate\n            shippedDate\n            status\n            orderdetails {\n                productCode\n                quantityOrdered\n                priceEach\n                orderLineNumber\n                products {\n                    productCode\n                    productName\n                    productLine\n                    productScale\n                    productVendor\n                    productDescription\n                    quantityInStock\n                    buyPrice\n                    MSRP\n                }\n            }\n        }\n    }\n}",
-						"variables": "{\n    \"filter\": {\n        \"customerNumber\": \"103\"\n    }\n}"
+						"query": "query($filter: FilterCustomer) {\n    customers(filter: $filter, limit: 1, search: false) {\n        customerNumber\n        customerName\n        employee {\n            employeeNumber\n            lastName\n            firstName\n        }\n        payments {\n            paymentDate\n            amount\n        },\n        orders {\n            orderNumber\n            orderDate\n            requiredDate\n            shippedDate\n            status\n            orderdetails {\n                productCode\n                quantityOrdered\n                priceEach\n                orderLineNumber\n                products {\n                    productCode\n                    productName\n                    productLine\n                    productScale\n                    productVendor\n                    productDescription\n                    quantityInStock\n                    buyPrice\n                    MSRP\n                }\n            }\n        }\n    }\n}",
+						"variables": "{\n    \"filter\": {\n        \"customerName\": \"Atelier graphique\"\n    }\n}"
 					}
 				},
 				"url": {

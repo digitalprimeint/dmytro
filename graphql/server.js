@@ -1,4 +1,6 @@
-const { ApolloServer, gql } = require("apollo-server");
+const { ApolloServer } = require("apollo-server");
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 require('dotenv').config();
 const db = require("./database");
 
@@ -14,7 +16,8 @@ const server = new ApolloServer({
     ],
     context: () => {
         return {
-            db: db
+            db: db,
+            Op: Op
         }
     }
 });

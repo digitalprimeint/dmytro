@@ -13,7 +13,7 @@ const typeDefs = gql`
     }
 
     extend type Query {
-        employees(filter: FilterEmployee, sort: [[String]], limit: Int, offset: Int) : [Employee]
+        employees(filter: FilterEmployee, sort: [[String]], limit: Int, offset: Int, search: Boolean) : [Employee]
     }
 
     type Employee {
@@ -32,7 +32,19 @@ const typeDefs = gql`
 const resolvers = {
     Query: {
         employees: (_, args, context, info) => {
-            return context.db.employees.findAll({where: args.filter, order: args.sort, limit: args.limit, offset: args.offset});
+            let filter = args.filter;
+            if(args.filter !== undefined && args.search === true) {
+                filter = { ...args.filter };
+                Object.keys(filter).map(key => {
+                    if(typeof filter[key]  === "string") {
+                        filter[key] = {
+                            [context.Op.like]: `%${args.filter[key]}%`
+                        }
+                    }
+                });
+            }
+
+            return context.db.employees.findAll({where: filter, order: args.sort, limit: args.limit, offset: args.offset});
         }
     },
     Employee: {

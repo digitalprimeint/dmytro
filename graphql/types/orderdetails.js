@@ -10,7 +10,7 @@ const typeDefs = gql`
     } 
 
     extend type Query {
-        orderdetails(filter: FilterOrder, sort: [[String]], limit: Int, offset: Int) : [OrderDetail]
+        orderdetails(filter: FilterOrder, sort: [[String]], limit: Int, offset: Int, search: Boolean) : [OrderDetail]
     }
 
     type OrderDetail {
@@ -27,7 +27,19 @@ const typeDefs = gql`
 const resolvers = {
     Query: {
         orderdetails: (_, args, context, info) => {
-            return context.db.orderdetails.findAll({where: args.filter, order: args.sort, limit: args.limit, offset: args.offset});
+            let filter = args.filter;
+            if(args.filter !== undefined && args.search === true) {
+                filter = { ...args.filter };
+                Object.keys(filter).map(key => {
+                    if(typeof filter[key]  === "string") {
+                        filter[key] = {
+                            [context.Op.like]: `%${args.filter[key]}%`
+                        }
+                    }
+                });
+            }
+
+            return context.db.orderdetails.findAll({where: filter, order: args.sort, limit: args.limit, offset: args.offset});
         }
     },
     OrderDetail: {
